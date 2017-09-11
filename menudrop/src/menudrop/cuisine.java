@@ -5,30 +5,37 @@ import java.awt.event.WindowEvent;
 import java.awt.event.*;
 //import java.util.*;
 import javax.swing.*;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import java.awt.Font;
+import java.util.Enumeration;
 
 
 
 public class cuisine implements ActionListener {
-	 JCheckBox cb1=new JCheckBox("Aloo Kebab (V) \n - 100/-");
-	    JCheckBox cb2=new JCheckBox("Lamb Roast (N) - 150/-");
-	    JCheckBox cb3=new JCheckBox("Kashmiri Biryani (V) - 150/-");
-	    JCheckBox cb4=new JCheckBox("Chicken Biryani (N) - 200/- ");
-	    JCheckBox cb5=new JCheckBox("Rainbow Delight - 120/-");
-	    JCheckBox cb6=new JCheckBox("Straw Thick shake - 70/-");
+	JPanel p1=new JPanel();   
+    JPanel p2=new JPanel();  
+    JPanel p3=new JPanel();
+	    JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
+		JCheckBox cb2=new JCheckBox("Lamb Roast 150/-");
+	    JCheckBox cb3=new JCheckBox("Kashmir pulav 150/-");
+	    JCheckBox cb4=new JCheckBox("Chicken Biryani 200/-");
+	    JCheckBox cb5=new JCheckBox("Rainbow Del8 120/-");
+	    JCheckBox cb6=new JCheckBox("Straw shake 70/-");
 	    
-	    JCheckBox cb7=new JCheckBox("paneer Kebab (V) - 120/-");
-	    JCheckBox cb8=new JCheckBox("chicken leg Roast (N) - 80/-");
-	    JCheckBox cb9=new JCheckBox("Jeera Biryani (V) - 110/-");
-	    JCheckBox cb10=new JCheckBox("Mutton Biryani (N) - 220/-");
-	    JCheckBox cb11=new JCheckBox("Matka kulfi - 70/-");
-	    JCheckBox cb12=new JCheckBox("aurora australis 150/-");
+	    JCheckBox cb7=new JCheckBox("Paneer Kebab 120/-");
+	    JCheckBox cb8=new JCheckBox("Chicken leg 80/-");
+	    JCheckBox cb9=new JCheckBox("Jeera Biryani 110/-");
+	    JCheckBox cb10=new JCheckBox("Mutton Biryani 220/-");
+	    JCheckBox cb11=new JCheckBox("Matka kulfi 70/-");
+	    JCheckBox cb12=new JCheckBox("Aurora 150/-");
 	    
-	    JCheckBox cb13=new JCheckBox("umbrella (mushroom) (N) -120/-");
-	    JCheckBox cb14=new JCheckBox("Chicken popcorn (N) -110/-");
-	    JCheckBox cb15=new JCheckBox(" Pulav (V) - 100/-");
-	    JCheckBox cb16=new JCheckBox("Egg Biryani (N) - 120/-");
-	    JCheckBox cb17=new JCheckBox("Simple Pineapple - 50/-");
-	    JCheckBox cb18=new JCheckBox("Perfect End - 120/-");
+	    JCheckBox cb13=new JCheckBox("Fun-Guy -120/-");
+	    JCheckBox cb14=new JCheckBox("Chicken Pop -110/-");
+	    JCheckBox cb15=new JCheckBox("Veg Pulav 100/-");
+	    JCheckBox cb16=new JCheckBox("Egg Biryani 120/-");
+	    JCheckBox cb17=new JCheckBox("Simple Pineapple 50/-");
+	    JCheckBox cb18=new JCheckBox("Perfect End 120/-");
 	    JSpinner sp1 = new JSpinner();
 	    JSpinner sp2 = new JSpinner();
 	    JSpinner sp3 = new JSpinner();
@@ -48,52 +55,78 @@ public class cuisine implements ActionListener {
 	    JSpinner sp17 = new JSpinner();
 	    JSpinner sp18 = new JSpinner();
 	    
+	    Color ash=new Color(225,225,225);
+	    Color non=new Color(255,55,55);
+	    Color veg=new Color(70,220,70);
+	    Color yel=new Color(230,240,5);
+	    Color blu=new Color(90,230,230);
+
+
+	    JTabbedPane tp=new JTabbedPane(); 
+	    
 	    JPanel Hi=new JPanel();
 	    JTextField custname=new JTextField();
 	    JTextField custtime=new JTextField();
 	    JTextField tableno=new JTextField();
-	    JLabel table=new JLabel("Table number :");
-	    JToggleButton takeaway = new JToggleButton("Takeaway");
-	    JToggleButton Mineral  = new JToggleButton("Serve Mineral water");
+	    JLabel table=new JLabel("TABLE NUMBER :");
+	    JToggleButton takeaway = new JToggleButton("TAKEAWAY");
+	    JToggleButton Mineral  = new JToggleButton("MINERAL WATER");
 	    JLabel takeawaymsg=new JLabel("WE PACK IT THE BEST WAY");
 	    
 	    
 	    JPanel info=new JPanel();
 	    JLabel order=new JLabel("YOUR ORDER");
 	    JTextArea orderlist = new JTextArea();
+	    Font myFont = new Font("Comic Sans MS",Font.BOLD,12);
+	    Font splFont = new Font("Comic Sans MS",Font.BOLD,16);
+	    
+	    JPanel bill=new JPanel();
+	    JLabel billhead=new JLabel("AMOUNT PAYABLE");
+	    JLabel food=new JLabel("FOOD");
+	    JLabel gst=new JLabel("GST (18%)");
+	    JLabel wait=new JLabel("DISCOUNT (10%)");
+	    JLabel last=new JLabel("TOTAL");
+	    JTextField bil=new JTextField();
+	    JTextField tax=new JTextField();
+	    JTextField disc=new JTextField();
+	    JTextField total=new JTextField();
+	   
+	    		
+		   
+        
 	    
 	cuisine(){
 		
 		Frame f=new Frame("SELECT YOUR FOOD");
 		GridLayout g=new GridLayout(0,2);
-		 
 		
 		
-
-		 
+		
+		
 		 Hi.setLayout(null); 
-		 Hi.setBounds(50,50,300,200);
-		 Hi.setBackground(Color.CYAN);
+		 Hi.setBounds(50,100,300,175);
+		 Hi.setBackground(blu);
 		 
-		 JLabel cust=new JLabel("Customer name    :");
+		 JLabel cust=new JLabel("CUSTOMER NAME    :");
 		 cust.setHorizontalAlignment(JLabel.LEFT);
 		 cust.setBounds(15,15,150,25);
-		 JLabel time=new JLabel("Customer arrival :");
+		 JLabel time=new JLabel("ARRIVAL TIME :");
 		 time.setHorizontalAlignment(JLabel.LEFT);
 		 time.setBounds(15,45,150,25);
 		 custname.setBounds(150,15,125,25); 
 		 custtime.setBounds(150,45,125,25);
 		 
 		 Mineral.setBounds(14,135,200,25);
-		 Mineral.setBackground(Color.CYAN);
-		 takeaway.setBounds(15,75,100,25);
-		 takeaway.setBackground(Color.CYAN);
+		 Mineral.setOpaque(false);
+		 takeaway.setBounds(15,75,200,25);
+		 takeaway.setOpaque(false);
 		 
 		 table.setHorizontalAlignment(JLabel.LEFT);
 		 table.setBounds(15,105,150,25);
 		 tableno.setBounds(150,105,125,25);
-		 takeawaymsg.setBounds(20,110,200,75);
-		 
+		 takeawaymsg.setBounds(20,90,250,75);
+		 takeawaymsg.setFont(splFont);
+		 takeawaymsg.setForeground(Color.white);
 		 Hi.add(Mineral);
 		 Hi.add(custtime);
 		 Hi.add(custname);
@@ -105,43 +138,62 @@ public class cuisine implements ActionListener {
 		 
 		 
 		 info.setLayout(null); 
-		 info.setBounds(50,270,300,200);
-		 info.setBackground(Color.CYAN);
+		 info.setBounds(400,275,300,200);
+		 info.setBackground(yel);
+		//info.setOpaque(false);
 		 
 		 order.setBounds(100,5,100,25);
 		 info.add(order);
-		 
 		 orderlist.setBounds(10,30,280,130);
 		 info.add(orderlist);
-		 
 		 orderlist.setEditable(false);
-		 
 		 orderlist.setLineWrap(true);
-		 
 		 JScrollPane scrollPane = new JScrollPane(orderlist);
-		 
-		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);      
-		 
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
 		 scrollPane.setBounds(10,30,280,130);
-		 
-		 
 		 info.add(scrollPane);
-		 
-		 JButton b=new JButton("Generate bill");
+		 JButton b=new JButton("VIEW ORDER");
 		 b.setBounds(15,165,125,25);
 		 info.add(b);
 		 b.addActionListener(this); 
-		    
-		    JTabbedPane tp=new JTabbedPane(); 
-		    tp.setBounds(400,50,300,200);
-		    
-		    JPanel p1=new JPanel();   
-		    JPanel p2=new JPanel();  
-		    JPanel p3=new JPanel();
-		    
-		    tp.add("starters",p1);
-		    tp.add("main course",p2);  
-		    tp.add("deserts",p3); 
+		 
+		 JButton gen=new JButton("CHECK OUT");
+		 gen.setBounds(150,165,125,25);
+		 info.add(gen);
+		 gen.addActionListener(this); 
+		
+		 
+		 
+		 bill.setLayout(null);
+		 bill.setBounds(50, 480, 300, 200);   
+		 bill.setBackground(yel);
+		 billhead.setBounds(100,10,150,25);
+		 bill.add(billhead);
+		 food.setBounds(25,35,150,25);
+		 bill.add(food);
+		 gst.setBounds(25,60,150,25);
+		 bill.add(gst);
+		 wait.setBounds(25,85,150,25);
+		 bill.add(wait);
+		 last.setBounds(25,120,150,25);
+		 bill.add(last);
+		 bil.setBounds(170,35,100,25);
+ 		bill.add(bil);bil.setEditable(false);
+ 		tax.setBounds(170,60,100,25);
+ 		bill.add(tax);tax.setEditable(false);
+ 		disc.setBounds(170,85,100,25);
+ 		bill.add(disc);disc.setEditable(false);
+ 		total.setBounds(180,120,100,25);
+ 		bill.add(total);total.setEditable(false);
+		
+ 		
+ 		
+		 tp.setBounds(50,275,300,200);
+	     tp.setBackground(yel);
+
+		    tp.add("Starters",p1);
+		    tp.add("Main course",p2);  
+		    tp.add("Deserts",p3); 
 		    
 		    takeaway.addActionListener(this);
 		    cb1.addActionListener(this); 
@@ -168,28 +220,43 @@ public class cuisine implements ActionListener {
 		    p2.setLayout(g);
 		    p3.setLayout(g);
 		   
-		    cb1.setBackground(Color.GREEN);
-		    cb2.setBackground(Color.RED);
-		    cb3.setBackground(Color.GREEN);
-		    cb4.setBackground(Color.RED);
-		    cb7.setBackground(Color.GREEN);
-		    cb8.setBackground(Color.RED);
-		    cb9.setBackground(Color.GREEN);
-		    cb10.setBackground(Color.RED);
-		    cb14.setBackground(Color.RED);
-		    cb15.setBackground(Color.GREEN);
+		    cb1.setBackground(veg);
+		    cb2.setBackground(non);
+		    cb3.setBackground(veg);
+		    cb4.setBackground(non);
+		    cb7.setBackground(veg);
+		    cb8.setBackground(non);
+		    cb9.setBackground(veg);
+		    cb10.setBackground(non);
+		    cb14.setBackground(non);
+		    cb15.setBackground(veg);
+		    
 		    
 		    p1.add(cb1);p1.add(sp1);p1.add(cb7);p1.add(sp7);p1.add(cb13);p1.add(sp13);p1.add(cb8);p1.add(sp8);p1.add(cb2);p1.add(sp2);p1.add(cb14);p1.add(sp14);
 		    p2.add(cb3);p2.add(sp3);p2.add(cb9);p2.add(sp9);p2.add(cb15);p2.add(sp15);p2.add(cb4);p2.add(sp4);p2.add(cb10);p2.add(sp10);p2.add(cb16);p2.add(sp16);		    		    		    
 		    p3.add(cb5);p3.add(sp5);p3.add(cb6);p3.add(sp6);p3.add(cb11);p3.add(sp11);p3.add(cb12);p3.add(sp12);p3.add(cb17);p3.add(sp17);p3.add(cb18);p3.add(sp18);
-		    
+	        
 		    f.add(tp);
 		    f.add(Hi);
 		    f.add(info);
+		    f.add(bill);
+		    
+		    Enumeration test = UIManager.getDefaults().keys();
 
-		    f.setSize(800,700);  
+	        while ( test.hasMoreElements() ) {  
+
+	            Object key = test.nextElement();  
+	            Object value = UIManager.get( key );  
+	            if ( value instanceof Font ) {  
+	                UIManager.put( key, myFont );  
+	            }  
+	        }
+	        SwingUtilities.updateComponentTreeUI(f);
+
+		    f.setSize(750,700);  
 		    f.setLayout(null);  
 		    f.setVisible(true);  
+		    f.setBackground(blu);
 		    f.addWindowListener(new WindowAdapter() {
 		         public void windowClosing(WindowEvent windowEvent){
 			            System.exit(0);
@@ -226,99 +293,109 @@ public class cuisine implements ActionListener {
 	        	if((Integer)sp1.getValue()<1){sp1.setValue(1);}
 	            amount+=100*(Integer)sp1.getValue();  
 	            msg+="Aloo Kebab (V) - 100*"+(Integer)sp1.getValue()+" = "+100*(Integer)sp1.getValue()+"\n";  
-	        }  
+	        }else {sp1.setValue(0);}
 	        if(cb2.isSelected()){  
 	        	if((Integer)sp2.getValue()<1){sp2.setValue(1);}
                 amount+=150*(Integer)sp2.getValue(); 
 	            msg+="Lamb Roast (N) - 150*"+(Integer)sp2.getValue()+" = "+150*(Integer)sp2.getValue()+"\n";  
-	        }  
+	        }  else {sp2.setValue(0);}
+	        
 	        if(cb3.isSelected()){  
 	        	if((Integer)sp3.getValue()<1){sp3.setValue(1);}
 	            amount+=150*(Integer)sp3.getValue();;  
 	            msg+="Kashmiri Biryani (V) - 150*"+(Integer)sp3.getValue()+" = "+150*(Integer)sp3.getValue()+"\n";  
-	        }  
+	        }  else {sp3.setValue(0);}
 	        if(cb4.isSelected()){ 
 	        	if((Integer)sp4.getValue()<1){sp4.setValue(1);}
 	        
 	            amount+=200*(Integer)sp4.getValue();  
 	            msg+="Chicken Biryani (N) - 200*"+(Integer)sp4.getValue()+" = "+200*(Integer)sp4.getValue()+"\n";  
-	        }  
+	        }  else {sp4.setValue(0);}
 	        if(cb5.isSelected()){ 
 	        	if((Integer)sp5.getValue()<1){sp5.setValue(1);}
 	            amount+=120*(Integer)sp5.getValue();;  
 	            msg+="Rainbow Delight - 120*"+(Integer)sp5.getValue()+" = "+120*(Integer)sp5.getValue()+"\n"; 
-	        }  
+	        }  else {sp5.setValue(0);}
 	        if(cb6.isSelected()){  
 	        	if((Integer)sp6.getValue()<1){sp6.setValue(1);}
 	            amount+=70*(Integer)sp6.getValue();;  
 	            msg+="Straw Thick shake - 70*"+(Integer)sp6.getValue()+" = "+70*(Integer)sp6.getValue()+"\n";  
-	        } 
+	        } else {sp6.setValue(0);}
 	        if(cb7.isSelected()){  
 	        	if((Integer)sp7.getValue()<1){sp7.setValue(1);}
 	            amount+=120*(Integer)sp7.getValue();  
 	            msg+="paneer Kebab (V) - 120*"+(Integer)sp7.getValue()+" = "+120*(Integer)sp7.getValue()+"\n";  
-	        }  
+	        }  else {sp7.setValue(0);}
 	        if(cb8.isSelected()){  
 	        	if((Integer)sp8.getValue()<1){sp8.setValue(1);}
 	            amount+=80*(Integer)sp8.getValue();;  
 	            msg+="chicken leg Roast (N) - 80*"+(Integer)sp8.getValue()+" = "+80*(Integer)sp8.getValue()+"\n";  
-	        }  
+	        } else {sp8.setValue(0);} 
 	        if(cb9.isSelected()){ 
 	        	if((Integer)sp9.getValue()<1){sp9.setValue(1);}
 	            amount+=110*(Integer)sp9.getValue();;  
 	            msg+="Jeera Biryani (V) - 110*"+(Integer)sp9.getValue()+" = "+110*(Integer)sp9.getValue()+"\n";
-	        } 
+	        } else {sp9.setValue(0);}
 	        if(cb10.isSelected()){  
 	        	if((Integer)sp10.getValue()<1){sp10.setValue(1);}
 	            amount+=220*(Integer)sp10.getValue();  
 	            msg+="Mutton Biryani (N) - 220*"+(Integer)sp10.getValue()+" = "+220*(Integer)sp10.getValue()+"\n";
-	        }  
+	        }  else {sp10.setValue(0);}
 	        if(cb11.isSelected()){  
 	        	if((Integer)sp11.getValue()<1){sp11.setValue(1);}
 	            amount+=70*(Integer)sp11.getValue();;  
 	            msg+="Matka kulfi - 70*"+(Integer)sp11.getValue()+" = "+70*(Integer)sp11.getValue()+"\n";
-	        }  
+	        }  else {sp12.setValue(0);}
 	        if(cb12.isSelected()){ 
 	        	if((Integer)sp12.getValue()<1){sp12.setValue(1);}
 	            amount+=150*(Integer)sp12.getValue();;  
 	            msg+="aurora australis 150*"+(Integer)sp12.getValue()+" = "+150*(Integer)sp12.getValue()+"\n";
-	        }  
+	        }  else {sp12.setValue(0);}
 	        if(cb13.isSelected()){  
 	        	if((Integer)sp13.getValue()<1){sp13.setValue(1);}
 	            amount+=120*(Integer)sp13.getValue();  
 	            msg+="umbrella (mushroom) (N) -120*"+(Integer)sp13.getValue()+" = "+120*(Integer)sp13.getValue()+"\n"; 
-	        }  
+	        }  else {sp13.setValue(0);}
 	        if(cb14.isSelected()){ 
 	        	if((Integer)sp14.getValue()<1){sp14.setValue(1);}
 	            amount+=110*(Integer)sp14.getValue();;  
 	            msg+="Chicken popcorn (N) -110*"+(Integer)sp14.getValue()+" = "+110*(Integer)sp14.getValue()+"\n";
-	        }  
+	        }  else {sp14.setValue(0);}
 	        if(cb15.isSelected()){  
 	        	if((Integer)sp15.getValue()<1){sp15.setValue(1);}
 	            amount+=100*(Integer)sp15.getValue();;  
 	            msg+=" Pulav (V) - 100*"+(Integer)sp15.getValue()+" = "+100*(Integer)sp15.getValue()+"\n";
-	        }  
+	        }  else {sp15.setValue(0);}
 	        if(cb16.isSelected()){  
 	        	if((Integer)sp16.getValue()<1){sp16.setValue(1);}
 	            amount+=120*(Integer)sp16.getValue();  
 	            msg+="Egg Biryani (N) - 120*"+(Integer)sp16.getValue()+" = "+120*(Integer)sp16.getValue()+"\n";
-	        }  
+	        }  else {sp16.setValue(0);}
 	        if(cb17.isSelected()){  
 	        	if((Integer)sp17.getValue()<1){sp17.setValue(1);}
 	            amount+=50*(Integer)sp17.getValue();;  
 	            msg+="Simple Pineapple - 50*"+(Integer)sp17.getValue()+" = "+50*(Integer)sp17.getValue()+"\n";
-	        }  
+	        }  else {sp17.setValue(0);}
 	        if(cb18.isSelected()){  
 	        	if((Integer)sp18.getValue()<1){sp18.setValue(1);}
 	            amount+=120*(Integer)sp18.getValue();;  
 	            msg+="Perfect End - 120*"+(Integer)sp18.getValue()+" = "+120*(Integer)sp18.getValue()+"\n";
-	        }  
+	        }  else {sp18.setValue(0);}
 	        
 	        msg+="-----------------\nTOTAL:";  
-	        if (e.getActionCommand().equals("Generate bill")) {
+	        if (e.getActionCommand().equals("VIEW ORDER")) {
 	            System.out.println(msg+amount);
 	            orderlist.setText(msg+amount);
-	          }  
+	          }
+	        if (e.getActionCommand().equals("GENERATE BILL")) {
+	            bil.setText(""+amount);
+	            tax.setText(""+0.18*amount);
+	            double x=1.18*amount;
+	            disc.setText("-"+(int)(x*0.1));
+	            int y=(int)(x*0.9);
+	            total.setText(y+"/-");
+	            
+	          }
 	    } 
 	public static void main(String[] args) {
 		new cuisine();
