@@ -19,22 +19,22 @@ public class cuisine implements ActionListener {
 	    JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
 		JCheckBox cb2=new JCheckBox("Lamb Roast 150/-");
 	    JCheckBox cb3=new JCheckBox("Kashmir pulav 150/-");
-	    JCheckBox cb4=new JCheckBox("Chicken Biryani 200/-");
+	    JCheckBox cb4=new JCheckBox("C-Biryani 200/-");
 	    JCheckBox cb5=new JCheckBox("Rainbow Del8 120/-");
 	    JCheckBox cb6=new JCheckBox("Straw shake 70/-");
 	    
-	    JCheckBox cb7=new JCheckBox("Paneer Kebab 120/-");
+	    JCheckBox cb7=new JCheckBox("PaneerKebab 120/-");
 	    JCheckBox cb8=new JCheckBox("Chicken leg 80/-");
 	    JCheckBox cb9=new JCheckBox("Jeera Biryani 110/-");
-	    JCheckBox cb10=new JCheckBox("Mutton Biryani 220/-");
+	    JCheckBox cb10=new JCheckBox("M-Biryani 220/-");
 	    JCheckBox cb11=new JCheckBox("Matka kulfi 70/-");
 	    JCheckBox cb12=new JCheckBox("Aurora 150/-");
 	    
-	    JCheckBox cb13=new JCheckBox("Fun-Guy -120/-");
-	    JCheckBox cb14=new JCheckBox("Chicken Pop -110/-");
+	    JCheckBox cb13=new JCheckBox("Fun-Guy 120/-");
+	    JCheckBox cb14=new JCheckBox("Chicken Pop 110/-");
 	    JCheckBox cb15=new JCheckBox("Veg Pulav 100/-");
 	    JCheckBox cb16=new JCheckBox("Egg Biryani 120/-");
-	    JCheckBox cb17=new JCheckBox("Simple Pineapple 50/-");
+	    JCheckBox cb17=new JCheckBox("Simple Pine 50/-");
 	    JCheckBox cb18=new JCheckBox("Perfect End 120/-");
 	    JSpinner sp1 = new JSpinner();
 	    JSpinner sp2 = new JSpinner();
@@ -58,27 +58,37 @@ public class cuisine implements ActionListener {
 	    Color ash=new Color(225,225,225);
 	    Color non=new Color(255,55,55);
 	    Color veg=new Color(70,220,70);
-	    Color yel=new Color(230,240,5);
-	    Color blu=new Color(90,230,230);
+	    Color yel=new Color(255,210,110);
+	    Color blu=new Color(150,205,255);
 
 
 	    JTabbedPane tp=new JTabbedPane(); 
 	    
 	    JPanel Hi=new JPanel();
 	    JTextField custname=new JTextField();
-	    JTextField custtime=new JTextField();
+	    JTextField custno=new JTextField("+91-");
 	    JTextField tableno=new JTextField();
 	    JLabel table=new JLabel("TABLE NUMBER :");
-	    JToggleButton takeaway = new JToggleButton("TAKEAWAY");
-	    JToggleButton Mineral  = new JToggleButton("MINERAL WATER");
+	    JCheckBox takeaway = new JCheckBox("TAKEAWAY");
+	    JButton dine  = new JButton("MAKE ORDER");
 	    JLabel takeawaymsg=new JLabel("WE PACK IT THE BEST WAY");
+	    
+	    JPanel offer=new JPanel();
+	    JTextArea welcome=new JTextArea("Welcome to XYZ resto");
+	    JLabel coup=new JLabel("Coupon (try:2ZERO)");
+	    JTextField code=new JTextField();
+	    JLabel buffet=new JLabel();
+	    JCheckBox buff=new JCheckBox("Buffet Dining");
+	    
+	    
 	    
 	    
 	    JPanel info=new JPanel();
 	    JLabel order=new JLabel("YOUR ORDER");
 	    JTextArea orderlist = new JTextArea();
-	    Font myFont = new Font("Comic Sans MS",Font.BOLD,12);
+	    Font myFont = new Font("SansSerif Plain",Font.BOLD,13);
 	    Font splFont = new Font("Comic Sans MS",Font.BOLD,16);
+	    Font wish = new Font("SansSerif Plain",Font.PLAIN,18);
 	    
 	    JPanel bill=new JPanel();
 	    JLabel billhead=new JLabel("AMOUNT PAYABLE");
@@ -105,43 +115,63 @@ public class cuisine implements ActionListener {
 		
 		 Hi.setLayout(null); 
 		 Hi.setBounds(50,100,300,175);
-		 Hi.setBackground(blu);
+		 Hi.setBackground(yel);
 		 
-		 JLabel cust=new JLabel("CUSTOMER NAME    :");
+		 JLabel cust=new JLabel("CUSTOMER NAME :");
 		 cust.setHorizontalAlignment(JLabel.LEFT);
 		 cust.setBounds(15,15,150,25);
-		 JLabel time=new JLabel("ARRIVAL TIME :");
-		 time.setHorizontalAlignment(JLabel.LEFT);
-		 time.setBounds(15,45,150,25);
+		 JLabel phone=new JLabel("PHONE :");
+		 phone.setHorizontalAlignment(JLabel.LEFT);
+		 phone.setBounds(15,45,150,25);
 		 custname.setBounds(150,15,125,25); 
-		 custtime.setBounds(150,45,125,25);
+		 custno.setBounds(150,45,125,25);
 		 
-		 Mineral.setBounds(14,135,200,25);
-		 Mineral.setOpaque(false);
+		 dine.setBounds(14,135,200,25);
+		 dine.setOpaque(false);
+		 dine.addActionListener(this);
 		 takeaway.setBounds(15,75,200,25);
 		 takeaway.setOpaque(false);
 		 
 		 table.setHorizontalAlignment(JLabel.LEFT);
 		 table.setBounds(15,105,150,25);
 		 tableno.setBounds(150,105,125,25);
-		 takeawaymsg.setBounds(20,90,250,75);
+		 takeawaymsg.setBounds(20,80,250,75);
 		 takeawaymsg.setFont(splFont);
-		 takeawaymsg.setForeground(Color.white);
-		 Hi.add(Mineral);
-		 Hi.add(custtime);
+		 Hi.add(dine);
+		 Hi.add(custno);
 		 Hi.add(custname);
 		 Hi.add(tableno);
 		 Hi.add(takeaway);
 		 Hi.add(cust);
-		 Hi.add(time);
+		 Hi.add(phone);
 		 Hi.add(table);
 		 
 		 
-		 info.setLayout(null); 
-		 info.setBounds(400,275,300,200);
-		 info.setBackground(yel);
-		//info.setOpaque(false);
+		 offer.setLayout(null);
+		 offer.setBounds(400,100,300,175);
+		 offer.setBackground(yel);
+		 welcome.setBounds(5,15,270,70);
+		 welcome.setEditable(false);
+		 welcome.setOpaque(false);
+		 welcome.setFont(wish);
+		 coup.setBounds(15,75,150,25);
+		 coup.setOpaque(false);
+		 buff.setBounds(10,110,150,25);
+		 buff.setOpaque(false);
+		 code.setBounds(150,75,100,25);
+		 buffet.setBounds(25,140,290,25);
+		 buffet.setOpaque(false);
+		 offer.add(buffet);
+		 buff.addActionListener(this);
+		 offer.add(code);
+		 offer.add(buff);
+		 offer.add(coup);
+		 offer.add(welcome);
+		 f.add(offer);
 		 
+		 info.setLayout(null); 
+		 info.setBounds(400,280,300,195);
+		 info.setBackground(yel);
 		 order.setBounds(100,5,100,25);
 		 info.add(order);
 		 orderlist.setBounds(10,30,280,130);
@@ -272,23 +302,32 @@ public class cuisine implements ActionListener {
 	           
 	        	Hi.remove(table);
 	        	Hi.remove(tableno);
-	        	Hi.remove(Mineral);
+	        	//Hi.remove(Mineral);
 	        	Hi.add(takeawaymsg);
 	        	Hi.revalidate();
 	        	Hi.repaint();
-	        	
+	        	offer.remove(buff);
+	        	offer.revalidate();
+	        	offer.repaint(); 	
 	        }
 	       else{
        
 	        	Hi.add(table);
 	        	Hi.add(tableno);
-	        	Hi.add(Mineral);
 	        	Hi.remove(takeawaymsg);
+	        	offer.add(buff);
+	        	offer.revalidate();
+	        	offer.repaint(); 
 	        	Hi.revalidate();
 	        	Hi.repaint();
 	        	
 	        }
-	        
+	        if(buff.isSelected())
+	        {msg="Buffer : 700/-\n-------------\nTotal :";amount=700;
+	        buffet.setText("You are AWESOME!!!");
+	        }
+	        else 
+	        {buffet.setText("We Serve AWESOME!!!");
 	        if(cb1.isSelected()){  
 	        	if((Integer)sp1.getValue()<1){sp1.setValue(1);}
 	            amount+=100*(Integer)sp1.getValue();  
@@ -383,18 +422,23 @@ public class cuisine implements ActionListener {
 	        }  else {sp18.setValue(0);}
 	        
 	        msg+="-----------------\nTOTAL:";  
+	        }
 	        if (e.getActionCommand().equals("VIEW ORDER")) {
-	            System.out.println(msg+amount);
+	            
 	            orderlist.setText(msg+amount);
 	          }
-	        if (e.getActionCommand().equals("GENERATE BILL")) {
+	        if (e.getActionCommand().equals("CHECK OUT")) {
 	            bil.setText(""+amount);
-	            tax.setText(""+0.18*amount);
+	            tax.setText(""+(int)(0.18*amount));
 	            double x=1.18*amount;
 	            disc.setText("-"+(int)(x*0.1));
 	            int y=(int)(x*0.9);
 	            total.setText(y+"/-");
 	            
+	          }
+	        if (e.getActionCommand().equals("MAKE ORDER")) {
+	        	String hie= "Hi "+custname.getText()+",Welcome\nDo you have a coupon code";
+	        	welcome.setText(hie);
 	          }
 	    } 
 	public static void main(String[] args) {
