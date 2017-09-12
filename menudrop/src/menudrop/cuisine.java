@@ -13,6 +13,7 @@ import java.util.Enumeration;
 
 
 public class cuisine implements ActionListener {
+	double d;
 	JPanel p1=new JPanel();   
     JPanel p2=new JPanel();  
     JPanel p3=new JPanel();
@@ -75,7 +76,7 @@ public class cuisine implements ActionListener {
 	    
 	    JPanel offer=new JPanel();
 	    JTextArea welcome=new JTextArea("Welcome to XYZ resto");
-	    JLabel coup=new JLabel("Coupon (try:2ZERO)");
+	    JLabel coup=new JLabel("Coupon (try:1ZERO)");
 	    JTextField code=new JTextField();
 	    JLabel buffet=new JLabel();
 	    JCheckBox buff=new JCheckBox("Buffet Dining");
@@ -94,7 +95,7 @@ public class cuisine implements ActionListener {
 	    JLabel billhead=new JLabel("AMOUNT PAYABLE");
 	    JLabel food=new JLabel("FOOD");
 	    JLabel gst=new JLabel("GST (18%)");
-	    JLabel wait=new JLabel("DISCOUNT (10%)");
+	    JLabel wait=new JLabel("COUPON");
 	    JLabel last=new JLabel("TOTAL");
 	    JTextField bil=new JTextField();
 	    JTextField tax=new JTextField();
@@ -427,12 +428,16 @@ public class cuisine implements ActionListener {
 	            
 	            orderlist.setText(msg+amount);
 	          }
+	        if(code.getText().equals("1ZERO"))
+	        {
+	        	d=0.1;
+	        }
 	        if (e.getActionCommand().equals("CHECK OUT")) {
 	            bil.setText(""+amount);
 	            tax.setText(""+(int)(0.18*amount));
-	            double x=1.18*amount;
-	            disc.setText("-"+(int)(x*0.1));
-	            int y=(int)(x*0.9);
+	            double x=(1.18)*amount;
+	            disc.setText("-"+(int)(x*d));
+	            int y=(int)(x*(1-d));
 	            total.setText(y+"/-");
 	            
 	          }

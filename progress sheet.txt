@@ -2,3 +2,4 @@
 11th sept : modified tp, created Jpanel-Hi,modified-Hi, created JPanel-order,modified-order
 11th sept : created Jpanel-bill,modified-bill
 12th Sept : created JPanel-offer
+12th Sept : added Buffet and coupon code functions
