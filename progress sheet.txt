@@ -3,3 +3,4 @@
 11th sept : created Jpanel-bill,modified-bill
 12th Sept : created JPanel-offer
 12th Sept : added Buffet and coupon code functions
+12th Sept : added JFrame to view occupied tables by using FileStream to store data.
