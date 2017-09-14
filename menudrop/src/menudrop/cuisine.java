@@ -124,6 +124,8 @@ public class cuisine implements ActionListener {
 	    JLabel taste = new JLabel("CHEF:");
 	    JLabel service=new JLabel("SERVICE:");
 	    JButton no=new JButton("VIEW LOG");
+	    JButton newcust=new JButton("NEW CUSTOMER");
+	    JButton thanku=new JButton("THANKYOU");
 	    
 	    		
 	    
@@ -132,7 +134,7 @@ public class cuisine implements ActionListener {
 		GridLayout g=new GridLayout(0,2);
 	    
 		
-		feedback.setBounds(400,480,300,180);
+		feedback.setBounds(400,480,300,200);
 		feedback.setBackground(yel);
 		feedback.setLayout(null);
 		f.add(feedback);
@@ -155,12 +157,18 @@ public class cuisine implements ActionListener {
 		
 		no.setBounds(10,100,100,25);
 		 no.addActionListener(this);
-		 
+		 newcust.setBounds(120,100,170,25);
+		 thanku.setBounds(10,130,280,60);
+		 newcust.addActionListener(this); 
+		    thanku.addActionListener(this);
+		    
 		feedback.add(taste);
 		feedback.add(chef);
 		feedback.add(service);
 		feedback.add(serv);
 		feedback.add(no);
+		feedback.add(newcust);
+		feedback.add(thanku);
 	    
 		occu.setSize(600,400);
 		occu.setLayout(null);
@@ -534,24 +542,30 @@ public class cuisine implements ActionListener {
 	            disc.setText("-"+(int)(x*d));
 	            int y=(int)(x*(1-d));
 	            total.setText(y+"/-");
-	            
-	            try{    
-	                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
-	                String s1=custname.getText(); 
-	                String s2=custno.getText(); 
-	                String s3=tableno.getText();
-	                String s4=orderlist.getText();
-	                String s5=total.getText();
-	                String s="\nNAME:"+s1+"\tPHONE:"+s2+"\tTABLE:"+s3+"\nORDER:\n"+s4+"\nAMOUNT PAID:"+s5+"\n-------------------------------------------------------------------------------------------------------------------\n";
-	                byte b[]=s.getBytes();//converting string into byte array    
-	                fout.write(b);    
-	                fout.close();    
-	                   
-	               }catch(Exception i){System.out.println(e);}
-	            
-	            cuisine c1=new cuisine();
-	            
+	           
 	          }
+	        if (e.getActionCommand().equals("THANKYOU")) {
+	        	 try{    
+		                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
+		                String s1=custname.getText(); 
+		                String s2=custno.getText(); 
+		                String s3=tableno.getText();
+		                String s4=orderlist.getText();
+		                String s5=total.getText();
+		                String s="\nNAME:"+s1+"\tPHONE:"+s2+"\tTABLE:"+s3+"\nORDER:\n"+s4+"\nAMOUNT PAID:"+s5+"\n-------------------------------------------------------------------------------------------------------------------\n";
+		                byte b[]=s.getBytes();//converting string into byte array    
+		                fout.write(b);    
+		                fout.close();    
+		                   
+		               }catch(Exception i){System.out.println(e);}
+	        	
+	        }
+	        
+	        if (e.getActionCommand().equals("NEW CUSTOMER")) {
+	        	 cuisine c1=new cuisine();
+		            
+	        }
+		        
 	        if (e.getActionCommand().equals("MAKE ORDER")) {
 	        	String hie= "Hi "+custname.getText()+",Welcome\nDo you have a coupon code";
 	        	welcome.setText(hie);
