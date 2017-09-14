@@ -1,7 +1,6 @@
 package menudrop;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
@@ -10,12 +9,10 @@ import javax.swing.UIManager;
 import java.awt.Font;
 import java.util.Enumeration;
 import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream; 
 import java.io.IOException;
-
-import java.io.FileWriter;
+import java.util.Date;
+ 
 
 
 
@@ -25,7 +22,8 @@ public class cuisine implements ActionListener {
     JPanel p2=new JPanel();  
     JPanel p3=new JPanel();
     
-    String t[];
+    String entry;
+    String exit;
     String str;
 	    JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
 		JCheckBox cb2=new JCheckBox("Lamb Roast 150/-");
@@ -97,6 +95,9 @@ public class cuisine implements ActionListener {
 	    JPanel info=new JPanel();
 	    JLabel order=new JLabel("YOUR ORDER");
 	    JTextArea orderlist = new JTextArea();
+	    JButton b=new JButton("VIEW ORDER");
+	    JButton gen=new JButton("PLACE ORDER");
+		 
 	    Font myFont = new Font("SansSerif Plain",Font.BOLD,13);
 	    Font splFont = new Font("Comic Sans MS",Font.BOLD,16);
 	    Font wish = new Font("SansSerif Plain",Font.PLAIN,18);
@@ -111,7 +112,12 @@ public class cuisine implements ActionListener {
 	    JTextField tax=new JTextField();
 	    JTextField disc=new JTextField();
 	    JTextField total=new JTextField();
-	   
+	    JRadioButton r1=new JRadioButton("CARD");    
+	    JRadioButton r2=new JRadioButton("CASH");    
+	    JButton pay= new JButton("MAKE PAYMENT");
+	        
+	    ButtonGroup bg=new ButtonGroup();    
+	    
 	    		
 		JFrame f=new JFrame("SELECT YOUR FOOD");
 			
@@ -126,6 +132,9 @@ public class cuisine implements ActionListener {
 	    JButton no=new JButton("VIEW LOG");
 	    JButton newcust=new JButton("NEW CUSTOMER");
 	    JButton thanku=new JButton("THANKYOU");
+	    JSlider chef = new JSlider(JSlider.HORIZONTAL, 0, 5,3);
+	    JSlider serv = new JSlider(JSlider.HORIZONTAL, 0, 5,2);  
+		
 	    
 	    		
 	    
@@ -141,14 +150,12 @@ public class cuisine implements ActionListener {
 		taste.setBounds(10,10,60,25);
 		service.setBounds(10,50,75,25);
 		
-		JSlider chef = new JSlider(JSlider.HORIZONTAL, 0, 5,3);
 		chef.setBounds(75,0,225,50);
 		chef.setMajorTickSpacing(1);  
 		chef.setPaintTicks(true);  
 		chef.setPaintLabels(true);
 		chef.setOpaque(false);
 		
-		JSlider serv = new JSlider(JSlider.HORIZONTAL, 0, 5,2);  
 		serv.setBounds(75,50,225,50);
 		serv.setMajorTickSpacing(1);  
 		serv.setPaintTicks(true);  
@@ -256,13 +263,11 @@ public class cuisine implements ActionListener {
 		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
 		 scrollPane.setBounds(10,30,280,130);
 		 info.add(scrollPane);
-		 JButton b=new JButton("VIEW ORDER");
 		 b.setBounds(15,165,125,25);
 		 info.add(b);
 		 b.addActionListener(this); 
 		 
-		 JButton gen=new JButton("CHECK OUT");
-		 gen.setBounds(150,165,125,25);
+		 gen.setBounds(145,165,140,25);
 		 info.add(gen);
 		 gen.addActionListener(this); 
 		
@@ -289,8 +294,18 @@ public class cuisine implements ActionListener {
  		bill.add(disc);disc.setEditable(false);
  		total.setBounds(180,120,100,25);
  		bill.add(total);total.setEditable(false);
-		
- 		
+ 		r1.setBounds(25,145,75,30);    
+	    r2.setBounds(25,165,75,30);
+	    bg.add(r1);bg.add(r2);  
+	    r1.setOpaque(false);
+	    r2.setOpaque(false);
+	    r1.addActionListener(this);
+	    r2.addActionListener(this);
+	    pay.setBounds(100,150,180,45);
+	    pay.setVisible(false);
+	    bill.add(pay);
+		   bill.add(r1);
+		   bill.add(r2);
  		
  		
  		
@@ -359,7 +374,7 @@ public class cuisine implements ActionListener {
 	        }
 	        SwingUtilities.updateComponentTreeUI(f);
 
-		    f.setSize(750,725);  
+		    f.setSize(775,725);  
 		    f.setLayout(null);  
 		    f.setVisible(true);  
 		     
@@ -380,7 +395,7 @@ public class cuisine implements ActionListener {
 	        String msg="";  
 	        
 	        if(takeaway.isSelected()){
-	           
+	        	amount=0;
 	        	Hi.remove(table);
 	        	Hi.remove(tableno);
 	        	//Hi.remove(Mineral);
@@ -389,10 +404,15 @@ public class cuisine implements ActionListener {
 	        	Hi.repaint();
 	        	offer.remove(buff);
 	        	offer.revalidate();
-	        	offer.repaint(); 	
+	        	offer.repaint(); 
+	        	buff.setSelected(false);
+	        	amount=0;
+		    	   msg=null;
+		    	   info.revalidate();
+		    	   info.repaint();
 	        }
 	       else{
-       
+	    	   amount=0;
 	        	Hi.add(table);
 	        	Hi.add(tableno);
 	        	Hi.remove(takeawaymsg);
@@ -404,9 +424,17 @@ public class cuisine implements ActionListener {
 	        	
 	        }
 	        if(buff.isSelected())
-	        {msg="Buffet : 700/-\n";amount=700;
+	        { 
+	        	
+	        	info.revalidate();
+		    	   info.repaint();
+	        	msg="Buffet : 700/-\n";amount=700;
+	        	
 	        buffet.setText("You are AWESOME!!!");
 	        }
+	        else
+	        {
+	        	
 	        if(cb1.isSelected()){  
 	        	if((Integer)sp1.getValue()<1){sp1.setValue(1);}
 	            amount+=100*(Integer)sp1.getValue();  
@@ -500,9 +528,48 @@ public class cuisine implements ActionListener {
 	            msg+="Perfect End - 120*"+(Integer)sp18.getValue()+" = "+120*(Integer)sp18.getValue()+"\n";
 	        }  else {sp18.setValue(0);}
 	        
-	        msg+="-----------------\nTOTAL:";  
+	        msg+="-----------------\nTOTAL:";  }
 	        
+	        if(r1.isSelected()||r2.isSelected())
+	        {
+	        	pay.setVisible(true);
+	        	bill.revalidate();
+	        	bill.repaint(); 
+	        }
 	        
+	        if (e.getActionCommand().equals("MAKE ORDER")) {
+	        	String hie= "Hi "+custname.getText()+",Welcome\nDo you have a coupon code";
+	        	welcome.setText(hie);
+	        	Date date = new Date();
+	            entry = String.format("%tc", date );
+	        	}
+	       
+		        
+	        if (e.getActionCommand().equals("VIEW ORDER")) {
+	        	if(takeaway.isSelected()==false&&buff.isSelected())
+	        	{msg="BUFFET 700\n";
+	        	amount=700;}
+	        	orderlist.setText(msg+amount);
+	        	info.revalidate();
+		    	   info.repaint();
+	                  }
+	        
+	        if(code.getText().equals("1ZERO"))
+	        {
+	        	d=0.1;
+	        }
+	        if (e.getActionCommand().equals("PLACE ORDER")) {
+	            bil.setText(""+amount);
+	            tax.setText(""+(int)(0.18*amount));
+	            double x=(1.18)*amount;
+	            disc.setText("-"+(int)(x*d));
+	            int y=(int)(x*(1-d));
+	            total.setText(y+"/-");
+	           
+	          }
+	        if (e.getActionCommand().equals("MAKE PAYMENT")) {
+	        	
+	        }
 	        
 	        if (e.getActionCommand().equals("VIEW LOG")) {
 	   		 occu.setVisible(true);  
@@ -526,51 +593,35 @@ public class cuisine implements ActionListener {
 		            
 	        }}
 	        
-		        
-	        if (e.getActionCommand().equals("VIEW ORDER")) {
-	        	orderlist.setText(msg+amount);
-	                  }
-	        
-	        if(code.getText().equals("1ZERO"))
-	        {
-	        	d=0.1;
-	        }
-	        if (e.getActionCommand().equals("CHECK OUT")) {
-	            bil.setText(""+amount);
-	            tax.setText(""+(int)(0.18*amount));
-	            double x=(1.18)*amount;
-	            disc.setText("-"+(int)(x*d));
-	            int y=(int)(x*(1-d));
-	            total.setText(y+"/-");
-	           
-	          }
 	        if (e.getActionCommand().equals("THANKYOU")) {
 	        	 try{    
+	        		 Date date = new Date();
+	 	            exit = String.format("%tc", date );
 		                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
 		                String s1=custname.getText(); 
 		                String s2=custno.getText(); 
 		                String s3=tableno.getText();
 		                String s4=orderlist.getText();
 		                String s5=total.getText();
-		                String s="\nNAME:"+s1+"\tPHONE:"+s2+"\tTABLE:"+s3+"\nORDER:\n"+s4+"\nAMOUNT PAID:"+s5+"\n-------------------------------------------------------------------------------------------------------------------\n";
+		                int i1= chef.getValue();
+		                int i2=serv.getValue();
+		                String s="\nNAME:"+s1+"\tPHONE:"+s2+"\tTABLE:"+s3+"\nENTRY TIME :"+entry+"\nORDER:\n"+s4+"\nAMOUNT PAID:"+s5+"\n##FEEDBACK##\nTASTE:"+i1+"/5\nSERVICE:"+i2+"/5\nEXIT TIME:"+exit+"\n-------------------------------------------------------------------------------------------------------------------\n";
 		                byte b[]=s.getBytes();//converting string into byte array    
 		                fout.write(b);    
 		                fout.close();    
 		                   
 		               }catch(Exception i){System.out.println(e);}
+	        	 f.dispose();
+	        	 
 	        	
 	        }
 	        
 	        if (e.getActionCommand().equals("NEW CUSTOMER")) {
-	        	 cuisine c1=new cuisine();
+	        	new cuisine();
 		            
 	        }
 		        
-	        if (e.getActionCommand().equals("MAKE ORDER")) {
-	        	String hie= "Hi "+custname.getText()+",Welcome\nDo you have a coupon code";
-	        	welcome.setText(hie);
-	        	
-	          }
+	       
 	       
 	        }
 	public static void main(String[] args) {

@@ -7,3 +7,4 @@
 13th Sept : was at hometown
 14th Sept : added rating, log register
 14th Sept(2): fixed some bugs
+14th sept : radia button method of cash, bug fixes
