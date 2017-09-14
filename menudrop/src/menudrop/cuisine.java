@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.*;
-//import java.util.*;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 import java.io.FileWriter;
 
@@ -24,6 +25,8 @@ public class cuisine implements ActionListener {
     JPanel p2=new JPanel();  
     JPanel p3=new JPanel();
     
+    String t[];
+    String str;
 	    JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
 		JCheckBox cb2=new JCheckBox("Lamb Roast 150/-");
 	    JCheckBox cb3=new JCheckBox("Kashmir pulav 150/-");
@@ -77,7 +80,6 @@ public class cuisine implements ActionListener {
 	    JTextField custno=new JTextField("+91-");
 	    JTextField tableno=new JTextField();
 	    JLabel table=new JLabel("TABLE NUMBER :");
-	    JButton no=new JButton("TAKEN TABLES");
 	    JCheckBox takeaway = new JCheckBox("TAKEAWAY");
 	    JButton dine  = new JButton("MAKE ORDER");
 	    JLabel takeawaymsg=new JLabel("WE PACK IT THE BEST WAY");
@@ -117,22 +119,61 @@ public class cuisine implements ActionListener {
 	    JPanel put=new JPanel();
 	    JTextArea tablelist = new JTextArea();
 	    
+	    
+	    JPanel feedback=new JPanel();
+	    JLabel taste = new JLabel("CHEF:");
+	    JLabel service=new JLabel("SERVICE:");
+	    JButton no=new JButton("VIEW LOG");
+	    
+	    		
+	    
 	cuisine(){
 				
 		GridLayout g=new GridLayout(0,2);
+	    
 		
-		occu.setSize(250,250);
+		feedback.setBounds(400,480,300,180);
+		feedback.setBackground(yel);
+		feedback.setLayout(null);
+		f.add(feedback);
+		taste.setBounds(10,10,60,25);
+		service.setBounds(10,50,75,25);
+		
+		JSlider chef = new JSlider(JSlider.HORIZONTAL, 0, 5,3);
+		chef.setBounds(75,0,225,50);
+		chef.setMajorTickSpacing(1);  
+		chef.setPaintTicks(true);  
+		chef.setPaintLabels(true);
+		chef.setOpaque(false);
+		
+		JSlider serv = new JSlider(JSlider.HORIZONTAL, 0, 5,2);  
+		serv.setBounds(75,50,225,50);
+		serv.setMajorTickSpacing(1);  
+		serv.setPaintTicks(true);  
+		serv.setPaintLabels(true); 
+		serv.setOpaque(false);
+		
+		no.setBounds(10,100,100,25);
+		 no.addActionListener(this);
+		 
+		feedback.add(taste);
+		feedback.add(chef);
+		feedback.add(service);
+		feedback.add(serv);
+		feedback.add(no);
+	    
+		occu.setSize(600,400);
 		occu.setLayout(null);
-		put.setBounds(10,10,240,240);
+		put.setBounds(10,10,550,350);
 		put.setLayout(null);
 		occu.add(put);
-		tablelist.setBounds(10,10,100,100);
+		tablelist.setBounds(10,10,540,350);
 		tablelist.setEditable(false);
 		 tablelist.setLineWrap(true);
 		 put.add(tablelist);
 		JScrollPane scp = new JScrollPane(tablelist);
 		 scp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-		 scp.setBounds(10,10,100,100);
+		 scp.setBounds(10,10,520,340);
 		 put.add(scp);
 		 occu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          
@@ -158,8 +199,6 @@ public class cuisine implements ActionListener {
 		 
 		 table.setHorizontalAlignment(JLabel.LEFT);
 		 table.setBounds(15,105,150,25);
-		 no.setBounds(130,75,150,25);
-		 no.addActionListener(this);
 		 tableno.setBounds(150,105,125,25);
 		 takeawaymsg.setBounds(20,80,250,75);
 		 takeawaymsg.setFont(splFont);
@@ -171,7 +210,7 @@ public class cuisine implements ActionListener {
 		 Hi.add(cust);
 		 Hi.add(phone);
 		 Hi.add(table);
-		 Hi.add(no);
+		 
 		 
 		 
 		 offer.setLayout(null);
@@ -245,6 +284,8 @@ public class cuisine implements ActionListener {
 		
  		
  		
+ 		
+ 		
 		 tp.setBounds(50,275,300,200);
 	     tp.setBackground(yel);
 
@@ -310,7 +351,7 @@ public class cuisine implements ActionListener {
 	        }
 	        SwingUtilities.updateComponentTreeUI(f);
 
-		    f.setSize(750,700);  
+		    f.setSize(750,725);  
 		    f.setLayout(null);  
 		    f.setVisible(true);  
 		     
@@ -322,6 +363,7 @@ public class cuisine implements ActionListener {
 			            System.exit(0);
 			         }        
 			      });*/
+		    
 		    
 		    
 	}
@@ -354,7 +396,7 @@ public class cuisine implements ActionListener {
 	        	
 	        }
 	        if(buff.isSelected())
-	        {msg="Buffer : 700/-\n-------------\nTotal :";amount=700;
+	        {msg="Buffet : 700/-\n";amount=700;
 	        buffet.setText("You are AWESOME!!!");
 	        }
 	        if(cb1.isSelected()){  
@@ -451,29 +493,36 @@ public class cuisine implements ActionListener {
 	        }  else {sp18.setValue(0);}
 	        
 	        msg+="-----------------\nTOTAL:";  
-	        if (e.getActionCommand().equals("TAKEN TABLES")) {
+	        
+	        
+	        
+	        if (e.getActionCommand().equals("VIEW LOG")) {
 	   		 occu.setVisible(true);  
-
 	        	
-	        	 try {
-			            BufferedReader in = new BufferedReader(new FileReader("D:\\testout.txt"));
-			            String str;
-			            while ((str = in.readLine()) != null)
-			            	tablelist.setText(str);
-			            in.close();
-			        } catch(Exception k) {
-			        	System.out.println(e);}
+	   		File file = new File("D:\\testout.txt");
+			FileInputStream fis = null;
+
+			try {
+				fis = new FileInputStream(file);
+
+				int content;
+				
+				while ((content = fis.read()) != -1) {
+					str+=(char)content;}
+			    tablelist.setText(str);
+				}
+
+			 catch (IOException k) {
+				k.printStackTrace();
+
 		            
-	        }
+	        }}
 	        
 		        
-	        
 	        if (e.getActionCommand().equals("VIEW ORDER")) {
-	            
-	            orderlist.setText(msg+amount);
-	           
-	            
+	        	orderlist.setText(msg+amount);
 	                  }
+	        
 	        if(code.getText().equals("1ZERO"))
 	        {
 	        	d=0.1;
@@ -486,28 +535,29 @@ public class cuisine implements ActionListener {
 	            int y=(int)(x*(1-d));
 	            total.setText(y+"/-");
 	            
+	            try{    
+	                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
+	                String s1=custname.getText(); 
+	                String s2=custno.getText(); 
+	                String s3=tableno.getText();
+	                String s4=orderlist.getText();
+	                String s5=total.getText();
+	                String s="\nNAME:"+s1+"\tPHONE:"+s2+"\tTABLE:"+s3+"\nORDER:\n"+s4+"\nAMOUNT PAID:"+s5+"\n-------------------------------------------------------------------------------------------------------------------\n";
+	                byte b[]=s.getBytes();//converting string into byte array    
+	                fout.write(b);    
+	                fout.close();    
+	                   
+	               }catch(Exception i){System.out.println(e);}
+	            
+	            cuisine c1=new cuisine();
+	            
 	          }
 	        if (e.getActionCommand().equals("MAKE ORDER")) {
 	        	String hie= "Hi "+custname.getText()+",Welcome\nDo you have a coupon code";
 	        	welcome.setText(hie);
-	        	try{    
-	                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
-	                String s=tableno.getText(); 
-	                s=s+",";
-	                byte b[]=s.getBytes();//converting string into byte array    
-	                fout.write(b);    
-	                fout.close();    
-	                System.out.println("success...");    
-	               }catch(Exception i){System.out.println(e);}
+	        	
 	          }
-	        try {
-	            BufferedReader in = new BufferedReader(new FileReader("D:\\testout.txt"));
-	            String str;
-	            while ((str = in.readLine()) != null)
-	               System.out.println(str);
-	            in.close();
-	        } catch(Exception k) {
-	        	System.out.println(e);}
+	       
 	        }
 	public static void main(String[] args) {
 		new cuisine();
