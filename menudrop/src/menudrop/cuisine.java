@@ -1,6 +1,5 @@
 package menudrop;
 import java.awt.*;
-
 import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
@@ -12,20 +11,50 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream; 
 import java.io.IOException;
 import java.util.Date;
- 
+import menudrop.login;
 
 
 
-public class cuisine implements ActionListener {
+public class cuisine implements ActionListener{
 	double d;
-	JPanel p1=new JPanel();   
-    JPanel p2=new JPanel();  
-    JPanel p3=new JPanel();
-    
+	
     String entry;
     String exit;
     String str;
-	    JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
+    Color ash=new Color(225,225,225);
+    Color non=new Color(255,55,55);
+    Color veg=new Color(70,220,70);
+    Color yel=new Color(255,210,110);
+    Color blu=new Color(150,205,255);
+    Font myFont = new Font("SansSerif Plain",Font.BOLD,13);
+    Font splFont = new Font("Comic Sans MS",Font.BOLD,16);
+    Font wish = new Font("SansSerif Plain",Font.PLAIN,18);
+    login lo=new login();
+    
+    JFrame f=new JFrame("CUSTOMER PROFORMA");
+    
+    JPanel Hi=new JPanel();
+    JTextField custname=new JTextField();
+    JTextField custno=new JTextField("+91-");
+    JTextField tableno=new JTextField();
+    JLabel table=new JLabel("TABLE NUMBER :");
+    JCheckBox takeaway = new JCheckBox("TAKEAWAY");
+    JButton dine  = new JButton("MAKE ORDER");
+    JLabel takeawaymsg=new JLabel("WE PACK IT THE BEST WAY");
+    
+    JPanel offer=new JPanel();
+    JTextArea welcome=new JTextArea("Welcome to XYZ resto");
+    JLabel coup=new JLabel("Coupon (try:1ZERO)");
+    JTextField code=new JTextField();
+    JLabel buffet=new JLabel();
+    JCheckBox buff=new JCheckBox("Buffet Dining");
+    
+    
+    JTabbedPane tp=new JTabbedPane();
+    JPanel p1=new JPanel();   
+    JPanel p2=new JPanel();  
+    JPanel p3=new JPanel();
+    	JCheckBox cb1=new JCheckBox("Aloo Kebab 100/-");
 		JCheckBox cb2=new JCheckBox("Lamb Roast 150/-");
 	    JCheckBox cb3=new JCheckBox("Kashmir pulav 150/-");
 	    JCheckBox cb4=new JCheckBox("C-Biryani 200/-");
@@ -64,139 +93,64 @@ public class cuisine implements ActionListener {
 	    JSpinner sp17 = new JSpinner();
 	    JSpinner sp18 = new JSpinner();
 	    
-	    Color ash=new Color(225,225,225);
-	    Color non=new Color(255,55,55);
-	    Color veg=new Color(70,220,70);
-	    Color yel=new Color(255,210,110);
-	    Color blu=new Color(150,205,255);
 
-
-	    JTabbedPane tp=new JTabbedPane(); 
-	    
-	    JPanel Hi=new JPanel();
-	    JTextField custname=new JTextField();
-	    JTextField custno=new JTextField("+91-");
-	    JTextField tableno=new JTextField();
-	    JLabel table=new JLabel("TABLE NUMBER :");
-	    JCheckBox takeaway = new JCheckBox("TAKEAWAY");
-	    JButton dine  = new JButton("MAKE ORDER");
-	    JLabel takeawaymsg=new JLabel("WE PACK IT THE BEST WAY");
-	    
-	    JPanel offer=new JPanel();
-	    JTextArea welcome=new JTextArea("Welcome to XYZ resto");
-	    JLabel coup=new JLabel("Coupon (try:1ZERO)");
-	    JTextField code=new JTextField();
-	    JLabel buffet=new JLabel();
-	    JCheckBox buff=new JCheckBox("Buffet Dining");
-	    
-	    
-	    
-	    
-	    JPanel info=new JPanel();
-	    JLabel order=new JLabel("YOUR ORDER");
-	    JTextArea orderlist = new JTextArea();
-	    JButton b=new JButton("VIEW ORDER");
-	    JButton gen=new JButton("PLACE ORDER");
-		 
-	    Font myFont = new Font("SansSerif Plain",Font.BOLD,13);
-	    Font splFont = new Font("Comic Sans MS",Font.BOLD,16);
-	    Font wish = new Font("SansSerif Plain",Font.PLAIN,18);
-	    
-	    JPanel bill=new JPanel();
-	    JLabel billhead=new JLabel("AMOUNT PAYABLE");
-	    JLabel food=new JLabel("FOOD");
-	    JLabel gst=new JLabel("GST (18%)");
-	    JLabel wait=new JLabel("COUPON");
-	    JLabel last=new JLabel("TOTAL");
-	    JTextField bil=new JTextField();
-	    JTextField tax=new JTextField();
-	    JTextField disc=new JTextField();
-	    JTextField total=new JTextField();
-	    JRadioButton r1=new JRadioButton("CARD");    
-	    JRadioButton r2=new JRadioButton("CASH");    
-	    JButton pay= new JButton("MAKE PAYMENT");
-	        
-	    ButtonGroup bg=new ButtonGroup();    
-	    
-	    		
-		JFrame f=new JFrame("SELECT YOUR FOOD");
+	 JPanel info=new JPanel();
+	 JLabel order=new JLabel("YOUR ORDER");
+	 JTextArea orderlist = new JTextArea();
+	 JButton b=new JButton("VIEW ORDER");
+	 JButton gen=new JButton("PLACE ORDER");
+	 
+	 JPanel bill=new JPanel();
+	 JLabel billhead=new JLabel("AMOUNT PAYABLE");
+	 JLabel food=new JLabel("FOOD");
+	 JLabel gst=new JLabel("GST (18%)");
+	 JLabel wait=new JLabel("COUPON");
+	 JLabel last=new JLabel("TOTAL");
+	 JTextField bil=new JTextField();
+	 JTextField tax=new JTextField();
+	 JTextField disc=new JTextField();
+	 JTextField total=new JTextField();
+	 JRadioButton r1=new JRadioButton("CARD");    
+	 JRadioButton r2=new JRadioButton("CASH");    
+	 JButton pay= new JButton("MAKE PAYMENT");    
+	 ButtonGroup bg=new ButtonGroup();   
+	 
+	 JPanel feedback=new JPanel();
+	 JLabel taste = new JLabel("CHEF:");
+	 JLabel service=new JLabel("SERVICE:");
+	 JButton no=new JButton("VIEW LOG");
+	 JButton newcust=new JButton("NEW CUSTOMER");
+	 JButton thanku=new JButton("THANKYOU");
+	 JSlider chef = new JSlider(JSlider.HORIZONTAL, 0, 5,3);
+	 JSlider serv = new JSlider(JSlider.HORIZONTAL, 0, 5,3); 
+	 JFrame note=new JFrame();
+	 JLabel feedus=new JLabel("Thankyou for visiting!!\n please provide feedback");
+     	
+	     
 			
-	    JFrame occu=new JFrame();
+	    JFrame log=new JFrame();
 	    JPanel put=new JPanel();
-	    JTextArea tablelist = new JTextArea();
-	    
-	    
-	    JPanel feedback=new JPanel();
-	    JLabel taste = new JLabel("CHEF:");
-	    JLabel service=new JLabel("SERVICE:");
-	    JButton no=new JButton("VIEW LOG");
-	    JButton newcust=new JButton("NEW CUSTOMER");
-	    JButton thanku=new JButton("THANKYOU");
-	    JSlider chef = new JSlider(JSlider.HORIZONTAL, 0, 5,3);
-	    JSlider serv = new JSlider(JSlider.HORIZONTAL, 0, 5,2);  
-		
-	    
-	    		
-	    
+	    JTextArea logreg = new JTextArea();
+	     
+	
 	cuisine(){
-				
+		
+		
 		GridLayout g=new GridLayout(0,2);
+		
+		JLabel heading=new JLabel(" Welcome to GOURMAND,\n your order is being noted by  :  "+lo.name.getText());
+        heading.setBounds(10,10,700,60);
+        heading.setFont(wish);
+	    JPanel pll=new JPanel();
+	    pll.setBounds(10,10,700,70);
+	    pll.setLayout(null);
+	    pll.setVisible(true);
 	    
+	    pll.add(heading);
 		
-		feedback.setBounds(400,480,300,200);
-		feedback.setBackground(yel);
-		feedback.setLayout(null);
-		f.add(feedback);
-		taste.setBounds(10,10,60,25);
-		service.setBounds(10,50,75,25);
-		
-		chef.setBounds(75,0,225,50);
-		chef.setMajorTickSpacing(1);  
-		chef.setPaintTicks(true);  
-		chef.setPaintLabels(true);
-		chef.setOpaque(false);
-		
-		serv.setBounds(75,50,225,50);
-		serv.setMajorTickSpacing(1);  
-		serv.setPaintTicks(true);  
-		serv.setPaintLabels(true); 
-		serv.setOpaque(false);
-		
-		no.setBounds(10,100,100,25);
-		 no.addActionListener(this);
-		 newcust.setBounds(120,100,170,25);
-		 thanku.setBounds(10,130,280,60);
-		 newcust.addActionListener(this); 
-		    thanku.addActionListener(this);
-		    
-		feedback.add(taste);
-		feedback.add(chef);
-		feedback.add(service);
-		feedback.add(serv);
-		feedback.add(no);
-		feedback.add(newcust);
-		feedback.add(thanku);
-	    
-		occu.setSize(600,400);
-		occu.setLayout(null);
-		put.setBounds(10,10,550,350);
-		put.setLayout(null);
-		occu.add(put);
-		tablelist.setBounds(10,10,540,350);
-		tablelist.setEditable(false);
-		 tablelist.setLineWrap(true);
-		 put.add(tablelist);
-		JScrollPane scp = new JScrollPane(tablelist);
-		 scp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-		 scp.setBounds(10,10,520,340);
-		 put.add(scp);
-		 occu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         
-		 
 		 Hi.setLayout(null); 
 		 Hi.setBounds(50,100,290,175);
 		 Hi.setBackground(yel);
-		 
 		 JLabel cust=new JLabel("CUSTOMER NAME :");
 		 cust.setHorizontalAlignment(JLabel.LEFT);
 		 cust.setBounds(15,15,150,25);
@@ -205,13 +159,12 @@ public class cuisine implements ActionListener {
 		 phone.setBounds(15,45,150,25);
 		 custname.setBounds(150,15,125,25); 
 		 custno.setBounds(150,45,125,25);
-		 
 		 dine.setBounds(14,135,200,25);
 		 dine.setOpaque(false);
 		 dine.addActionListener(this);
 		 takeaway.setBounds(15,75,125,25);
 		 takeaway.setOpaque(false);
-		 
+		 takeaway.addActionListener(this);
 		 table.setHorizontalAlignment(JLabel.LEFT);
 		 table.setBounds(15,105,150,25);
 		 tableno.setBounds(150,105,125,25);
@@ -225,7 +178,7 @@ public class cuisine implements ActionListener {
 		 Hi.add(cust);
 		 Hi.add(phone);
 		 Hi.add(table);
-		 
+		
 		 
 		 
 		 offer.setLayout(null);
@@ -250,73 +203,16 @@ public class cuisine implements ActionListener {
 		 offer.add(welcome);
 		 f.add(offer);
 		 
-		 info.setLayout(null); 
-		 info.setBounds(400,280,300,195);
-		 info.setBackground(yel);
-		 order.setBounds(100,5,100,25);
-		 info.add(order);
-		 orderlist.setBounds(10,30,280,130);
-		 info.add(orderlist);
-		 orderlist.setEditable(false);
-		 orderlist.setLineWrap(true);
-		 JScrollPane scrollPane = new JScrollPane(orderlist);
-		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-		 scrollPane.setBounds(10,30,280,130);
-		 info.add(scrollPane);
-		 b.setBounds(15,165,125,25);
-		 info.add(b);
-		 b.addActionListener(this); 
 		 
-		 gen.setBounds(145,165,140,25);
-		 info.add(gen);
-		 gen.addActionListener(this); 
-		
-		 
-		 
-		 bill.setLayout(null);
-		 bill.setBounds(50, 480, 300, 200);   
-		 bill.setBackground(yel);
-		 billhead.setBounds(100,10,150,25);
-		 bill.add(billhead);
-		 food.setBounds(25,35,150,25);
-		 bill.add(food);
-		 gst.setBounds(25,60,150,25);
-		 bill.add(gst);
-		 wait.setBounds(25,85,150,25);
-		 bill.add(wait);
-		 last.setBounds(25,120,150,25);
-		 bill.add(last);
-		 bil.setBounds(170,35,100,25);
- 		bill.add(bil);bil.setEditable(false);
- 		tax.setBounds(170,60,100,25);
- 		bill.add(tax);tax.setEditable(false);
- 		disc.setBounds(170,85,100,25);
- 		bill.add(disc);disc.setEditable(false);
- 		total.setBounds(180,120,100,25);
- 		bill.add(total);total.setEditable(false);
- 		r1.setBounds(25,145,75,30);    
-	    r2.setBounds(25,165,75,30);
-	    bg.add(r1);bg.add(r2);  
-	    r1.setOpaque(false);
-	    r2.setOpaque(false);
-	    r1.addActionListener(this);
-	    r2.addActionListener(this);
-	    pay.setBounds(100,150,180,45);
-	    pay.setVisible(false);
-	    bill.add(pay);
-		   bill.add(r1);
-		   bill.add(r2);
- 		
- 		
- 		
 		 tp.setBounds(50,275,300,200);
 	     tp.setBackground(yel);
-
 		    tp.add("Starters",p1);
 		    tp.add("Main course",p2);  
 		    tp.add("Deserts",p3); 
-		    
-		    takeaway.addActionListener(this);
+		    p1.setLayout(g);
+		    p2.setLayout(g);
+		    p3.setLayout(g);
+
 		    cb1.addActionListener(this); 
 		    cb2.addActionListener(this);
 		    cb3.addActionListener(this);
@@ -335,12 +231,7 @@ public class cuisine implements ActionListener {
 		    cb16.addActionListener(this);
 		    cb17.addActionListener(this);
 		    cb18.addActionListener(this);
-		   
-		   
-		    p1.setLayout(g);
-		    p2.setLayout(g);
-		    p3.setLayout(g);
-		   
+		     
 		    cb1.setBackground(veg);
 		    cb2.setBackground(non);
 		    cb3.setBackground(veg);
@@ -352,16 +243,126 @@ public class cuisine implements ActionListener {
 		    cb14.setBackground(non);
 		    cb15.setBackground(veg);
 		    
-		    
 		    p1.add(cb1);p1.add(sp1);p1.add(cb7);p1.add(sp7);p1.add(cb13);p1.add(sp13);p1.add(cb8);p1.add(sp8);p1.add(cb2);p1.add(sp2);p1.add(cb14);p1.add(sp14);
 		    p2.add(cb3);p2.add(sp3);p2.add(cb9);p2.add(sp9);p2.add(cb15);p2.add(sp15);p2.add(cb4);p2.add(sp4);p2.add(cb10);p2.add(sp10);p2.add(cb16);p2.add(sp16);		    		    		    
 		    p3.add(cb5);p3.add(sp5);p3.add(cb6);p3.add(sp6);p3.add(cb11);p3.add(sp11);p3.add(cb12);p3.add(sp12);p3.add(cb17);p3.add(sp17);p3.add(cb18);p3.add(sp18);
 	        
-		    f.add(tp);
+		 
+		 info.setLayout(null); 
+		 info.setBounds(400,280,300,195);
+		 info.setBackground(yel);
+		 order.setBounds(100,5,100,25);
+		 info.add(order);
+		 orderlist.setBounds(10,30,280,130);
+		 info.add(orderlist);
+		 orderlist.setEditable(false);
+		 orderlist.setLineWrap(true);
+		 JScrollPane scrollPane = new JScrollPane(orderlist);
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		 scrollPane.setBounds(10,30,280,130);
+		 info.add(scrollPane);
+		 b.setBounds(15,165,125,25);
+		 info.add(b);
+		 b.addActionListener(this); 
+		 gen.setBounds(145,165,140,25);
+		 info.add(gen);
+		 gen.addActionListener(this); 
+		 
+		 
+		 bill.setLayout(null);
+		 bill.setBounds(50, 480, 300, 200);   
+		 bill.setBackground(yel);
+		 billhead.setBounds(100,10,150,25);
+		 bill.add(billhead);
+		 food.setBounds(25,35,150,25);
+		 bill.add(food);
+		 gst.setBounds(25,60,150,25);
+		 bill.add(gst);
+		 wait.setBounds(25,85,150,25);
+		 bill.add(wait);
+		 last.setBounds(25,120,150,25);
+		 bill.add(last);
+		 bil.setBounds(170,35,100,25);
+ 		 bill.add(bil);bil.setEditable(false);
+ 		 tax.setBounds(170,60,100,25);
+ 		 bill.add(tax);tax.setEditable(false);
+ 		 disc.setBounds(170,85,100,25);
+ 		 bill.add(disc);disc.setEditable(false);
+ 		 total.setBounds(180,120,100,25);
+ 		 bill.add(total);total.setEditable(false);
+ 		 r1.setBounds(25,145,75,30);    
+	     r2.setBounds(25,165,75,30);
+	     bg.add(r1);bg.add(r2);  
+	     r1.setOpaque(false);
+	     r2.setOpaque(false);
+	     r1.addActionListener(this);
+	     r2.addActionListener(this);
+	     pay.setBounds(100,150,180,45);
+	     pay.setVisible(false);
+	     bill.add(pay);
+		 bill.add(r1);
+		 bill.add(r2);
+
+	     feedback.setBounds(400,480,300,200);
+      	 feedback.setBackground(yel);
+		 feedback.setLayout(null);
+		 f.add(feedback);
+		 taste.setBounds(10,10,60,25);
+		 service.setBounds(10,50,75,25);
+		 chef.setBounds(75,0,225,50);
+		 chef.setMajorTickSpacing(1);  
+		 chef.setPaintTicks(true);  
+		 chef.setPaintLabels(true);
+		 chef.setOpaque(false);
+		 serv.setBounds(75,50,225,50);
+		 serv.setMajorTickSpacing(1);  
+		 serv.setPaintTicks(true);  
+		 serv.setPaintLabels(true); 
+		 serv.setOpaque(false);
+		 no.setBounds(10,100,100,25);
+	     no.addActionListener(this);
+		 newcust.setBounds(120,100,170,25);
+	     thanku.setBounds(10,130,280,60);
+	     newcust.addActionListener(this); 
+	     thanku.addActionListener(this);   
+		 feedback.add(taste);
+		 feedback.add(chef);
+		 feedback.add(service);
+		 feedback.add(serv);
+		 feedback.add(no);
+		 feedback.add(newcust);
+		 feedback.add(thanku);
+	    
+		 log.setSize(600,400);
+		 log.setLayout(null);
+		 put.setBounds(10,10,550,350);
+		 put.setLayout(null);
+		 log.add(put);
+		 logreg.setBounds(10,10,540,350);
+		 logreg.setEditable(false);
+		 logreg.setLineWrap(true);
+		 put.add(logreg);
+		 JScrollPane scp = new JScrollPane(logreg);
+		 scp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		 scp.setBounds(10,10,520,340);
+		 put.add(scp);
+		 log.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         
+		 note.setSize(600,200);
+     	 note.setLayout(null);
+     	 note.add(feedus);
+     	 feedus.setBounds(10,10,600,200);
+     	 feedus.setFont(wish);
+     	 note.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         
+		 
+		
+ 		
+		 		    f.add(tp);
 		    f.add(Hi);
 		    f.add(info);
 		    f.add(bill);
-		    
+		    f.add(pll);
 		    Enumeration test = UIManager.getDefaults().keys();
 
 	        while ( test.hasMoreElements() ) {  
@@ -388,7 +389,6 @@ public class cuisine implements ActionListener {
 			      });*/
 		    
 		    
-		    
 	}
 	 public void actionPerformed(ActionEvent e){  
 	        float amount=0;  
@@ -398,7 +398,6 @@ public class cuisine implements ActionListener {
 	        	amount=0;
 	        	Hi.remove(table);
 	        	Hi.remove(tableno);
-	        	//Hi.remove(Mineral);
 	        	Hi.add(takeawaymsg);
 	        	Hi.revalidate();
 	        	Hi.repaint();
@@ -407,9 +406,9 @@ public class cuisine implements ActionListener {
 	        	offer.repaint(); 
 	        	buff.setSelected(false);
 	        	amount=0;
-		    	   msg=null;
-		    	   info.revalidate();
-		    	   info.repaint();
+		    	msg="";
+		    	info.revalidate();
+		    	info.repaint();
 	        }
 	       else{
 	    	   amount=0;
@@ -421,16 +420,13 @@ public class cuisine implements ActionListener {
 	        	offer.repaint(); 
 	        	Hi.revalidate();
 	        	Hi.repaint();
-	        	
 	        }
 	        if(buff.isSelected())
 	        { 
-	        	
 	        	info.revalidate();
-		    	   info.repaint();
-	        	msg="Buffet : 700/-\n";amount=700;
-	        	
-	        buffet.setText("You are AWESOME!!!");
+		    	info.repaint();
+	        	msg="Buffet : 700/-\n";amount=700;	
+	            buffet.setText("You are AWESOME!!!");
 	        }
 	        else
 	        {
@@ -533,6 +529,7 @@ public class cuisine implements ActionListener {
 	        if(r1.isSelected()||r2.isSelected())
 	        {
 	        	pay.setVisible(true);
+	        	pay.addActionListener(this);
 	        	bill.revalidate();
 	        	bill.repaint(); 
 	        }
@@ -547,12 +544,14 @@ public class cuisine implements ActionListener {
 		        
 	        if (e.getActionCommand().equals("VIEW ORDER")) {
 	        	if(takeaway.isSelected()==false&&buff.isSelected())
-	        	{msg="BUFFET 700\n";
-	        	amount=700;}
-	        	orderlist.setText(msg+amount);
-	        	info.revalidate();
-		    	   info.repaint();
-	                  }
+	        	{
+	        		msg="BUFFET 700\n";
+	        		amount=700;
+	            }
+	        		orderlist.setText(msg+amount);
+	        		info.revalidate();
+	        		info.repaint();
+	            }
 	        
 	        if(code.getText().equals("1ZERO"))
 	        {
@@ -569,34 +568,32 @@ public class cuisine implements ActionListener {
 	          }
 	        if (e.getActionCommand().equals("MAKE PAYMENT")) {
 	        	
+	        	note.setVisible(true);
 	        }
 	        
 	        if (e.getActionCommand().equals("VIEW LOG")) {
-	   		 occu.setVisible(true);  
-	        	
-	   		File file = new File("D:\\testout.txt");
-			FileInputStream fis = null;
+	   		 log.setVisible(true); 
+	   		 File file = new File("D:\\testout.txt");
+			 FileInputStream fis = null;
 
-			try {
+			 try {
 				fis = new FileInputStream(file);
-
 				int content;
-				
 				while ((content = fis.read()) != -1) {
 					str+=(char)content;}
-			    tablelist.setText(str);
+			    	logreg.setText(str);
 				}
-
 			 catch (IOException k) {
 				k.printStackTrace();
-
+			    }
 		            
-	        }}
+	        }
 	        
 	        if (e.getActionCommand().equals("THANKYOU")) {
 	        	 try{    
 	        		 Date date = new Date();
-	 	            exit = String.format("%tc", date );
+	 	             exit = String.format("%tc", date );
+	 	            
 		                FileOutputStream fout=new FileOutputStream("D:\\testout.txt",true);    
 		                String s1=custname.getText(); 
 		                String s2=custno.getText(); 
@@ -610,23 +607,18 @@ public class cuisine implements ActionListener {
 		                fout.write(b);    
 		                fout.close();    
 		                   
-		               }catch(Exception i){System.out.println(e);}
-	        	 f.dispose();
-	        	 
-	        	
+		               }
+	        	 catch(Exception i)
+	        	 		{System.out.println(e);}
+	        	 note.dispose();
+	        	 f.dispose();	
 	        }
 	        
 	        if (e.getActionCommand().equals("NEW CUSTOMER")) {
-	        	new cuisine();
-		            
+	        	lo.first.dispose();
+	        	new login();
+	        	new cuisine();   
 	        }
-		        
-	       
-	       
-	        }
-	public static void main(String[] args) {
-		new cuisine();
-
-	}
-
+	   }
+	
 }

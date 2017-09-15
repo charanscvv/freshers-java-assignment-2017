@@ -8,3 +8,8 @@
 14th Sept : added rating, log register
 14th Sept(2): fixed some bugs
 14th sept : radia button method of cash, bug fixes
+15th sept : - added manager page
+	    - created class interface to communicate with cuisine()
+	    - created title banner in cuisine class
+	    - changed functionality and Bug fixes
+ 	    - DATE and TIME in log register
